@@ -441,11 +441,6 @@ pub fn derive_active_model(input: TokenStream) -> TokenStream {
     }
 }
 
-#[proc_macro_attribute]
-pub fn derive_active_model_deserialize_serialize(_attr: TokenStream, _item: TokenStream) -> TokenStream {
-    _item
-}
-
 /// Derive into an active model
 #[cfg(feature = "derive")]
 #[proc_macro_derive(DeriveIntoActiveModel, attributes(sea_orm))]

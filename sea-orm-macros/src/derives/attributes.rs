@@ -16,6 +16,7 @@ pub mod derive_attr {
         pub comment: Option<syn::Lit>,
         pub table_iden: Option<()>,
         pub rename_all: Option<syn::Lit>,
+        pub derive_active_model_deserialize_serialize: Option<()>,
     }
 }
 

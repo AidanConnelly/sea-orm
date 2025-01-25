@@ -81,13 +81,15 @@ fn derive_active_model(
 
     let mut derive_deserialize_serialize = false;
     for attr in attrs {
-        if let Meta::Path(
-            Path { segments, .. }
-        ) = attr.meta
-        {
-            for segment in segments {
-                if segment.ident == "derive_active_model_deserialize_serialize"{
-                    derive_deserialize_serialize = true;
+        if let Meta::List(MetaList { tokens, .. }) = attr.meta.clone() {
+            for token in tokens.into_iter() {
+                match token {
+                    proc_macro2::TokenTree::Ident(ident) => {
+                        if ident.to_string() == "derive_active_model_deserialize_serialize" {
+                            derive_deserialize_serialize = true;
+                        }
+                    }
+                    _ => {}
                 }
             }
         }
@@ -95,7 +97,7 @@ fn derive_active_model(
 
     let deserialize_serialize_tokens = if derive_deserialize_serialize {
         quote!(, Deserialize, Serialize)
-    } else{
+    } else {
         quote!()
     };
 
