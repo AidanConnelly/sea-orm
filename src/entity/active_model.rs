@@ -5,7 +5,7 @@ use crate::{
 use async_trait::async_trait;
 use sea_query::{Nullable, ValueTuple};
 use std::fmt::Debug;
-
+use serde::{Deserialize, Serialize};
 pub use ActiveValue::NotSet;
 
 /// Defines a stateful value used in ActiveModel.
@@ -36,7 +36,7 @@ pub use ActiveValue::NotSet;
 ///     r#"UPDATE "fruit" SET "name" = 'Orange' WHERE "fruit"."id" = 1"#
 /// );
 /// ```
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub enum ActiveValue<V>
 where
     V: Into<Value>,
